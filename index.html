@@ -3,211 +3,545 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maystories - أسرار وخفايا</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <title>Maystories - اعترافات وأسرار</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #f3f4f9;
+            --card-bg: #ffffff;
+            --primary-color: #1e90ff;
+            --text-dark: #1a1a2e;
+            --text-muted: #7e7e9a;
+            --accent-orange: #ff6b6b;
+        }
+
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: #f4f6f9;
+            background-color: var(--bg-color);
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            color: var(--text-dark);
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
+
+        /* حاوية التطبيق الرئيسية */
         .app-container {
             width: 100%;
             max-width: 480px;
-            background: #ffffff;
+            background: var(--bg-color);
             min-height: 100vh;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            box-shadow: 0 0 30px rgba(0,0,0,0.08);
             display: flex;
             flex-direction: column;
             position: relative;
+            padding-bottom: 90px; /* مسافة لشريط التنقل السفلي */
+            box-sizing: border-box;
         }
+
+        /* الهيدر العلوي */
         .header {
-            background-color: #ffffff;
+            background-color: var(--card-bg);
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #eeeff2;
+            border-bottom: 1px solid #eef0f5;
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 100;
         }
-        .header h1 {
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             font-size: 20px;
-            color: #1a202c;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .header-logo span {
+            color: var(--primary-color);
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .menu-btn span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        /* القائمة الجانبية (Sidebar) */
+        .sidebar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100%;
+            background: var(--card-bg);
+            z-index: 200;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.15);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            padding: 30px 20px;
+            box-sizing: border-box;
+        }
+
+        .sidebar.active {
+            transform: translateX(0);
+        }
+
+        .sidebar-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 150;
+            display: none;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
             margin: 0;
-            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
-        .content {
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 12px;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .sidebar-item:hover {
+            background-color: #f0f4f8;
+            color: var(--primary-color);
+        }
+
+        /* المحتوى والتبويبات */
+        .tab-content {
             padding: 20px;
-            flex: 1;
-            padding-bottom: 40px;
+            display: none;
         }
-        .story-card {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
+
+        .tab-content.active {
+            display: block;
         }
-        .story-title {
-            font-size: 18px;
-            color: #2d3748;
-            font-weight: 700;
-            margin-bottom: 12px;
-            line-height: 1.4;
-            border-right: 4px solid #3182ce;
-            padding-right: 10px;
-        }
-        .story-text {
-            font-size: 14px;
-            color: #4a5568;
-            line-height: 1.8;
-            white-space: pre-line;
-            margin-bottom: 15px;
-        }
-        .locker-overlay {
-            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.95) 20%, rgba(255,255,255,1) 100%);
-            padding: 30px 15px 15px 15px;
-            text-align: center;
-            margin-top: -80px;
-            position: relative;
-            z-index: 5;
-        }
-        .lock-box {
-            background: #ffffff;
-            border: 1px solid #edf2f7;
-            border-radius: 16px;
-            padding: 20px 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.06);
-        }
-        .lock-icon {
-            font-size: 30px;
-            color: #dd6b20;
-            margin-bottom: 10px;
-        }
-        .lock-title {
+
+        .section-title {
             font-size: 15px;
             font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 8px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            padding-right: 5px;
         }
-        .lock-desc {
-            font-size: 12px;
-            color: #718096;
+
+        /* بطاقات القصص الفخمة (تصميم الصورة الأولى تماماً) */
+        .story-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .story-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
             margin-bottom: 15px;
+        }
+
+        .story-info {
+            flex: 1;
+        }
+
+        .story-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0 0 10px 0;
             line-height: 1.5;
         }
-        .lock-btn {
-            background-color: #3182ce;
-            color: white;
+
+        .story-snippet {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* الأيقونة الرمادية الجانبية للقصة */
+        .story-icon-wrapper {
+            background-color: #f0f2f6;
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .story-icon-wrapper svg {
+            width: 26px;
+            height: 26px;
+            fill: #9ea3b2;
+        }
+
+        /* زر قراءة التكملة الصادمة */
+        .read-btn {
+            background-color: #eaf3ff;
+            color: var(--primary-color);
             border: none;
-            padding: 12px 20px;
-            font-size: 14px;
+            padding: 10px 20px;
+            font-size: 13px;
             font-weight: 700;
-            border-radius: 10px;
+            border-radius: 30px;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: 0.2s;
+        }
+
+        .read-btn:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+        }
+
+        /* صفحة مشاركة الأسرار (الاعترافات) */
+        .submit-box {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            background-color: #f7f8fa;
+            border: 1px solid #eef0f5;
+            border-radius: 12px;
+            padding: 15px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 14px;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .input-field:focus {
+            border-color: var(--primary-color);
+            background-color: #ffffff;
+        }
+
+        .textarea-field {
+            min-height: 150px;
+            resize: none;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 12px;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 4px 10px rgba(49,130,206,0.25);
-            transition: background 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(30,144,255,0.3);
         }
-        .lock-btn:hover {
-            background-color: #2b6cb0;
+
+        /* شريط التنقل السفلي الفخم */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--card-bg);
+            height: 75px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #eef0f5;
+            z-index: 100;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.02);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            background: none;
+            border: none;
+            padding: 5px 10px;
+        }
+
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--text-muted);
+            transition: 0.2s;
+        }
+
+        .nav-item.active {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .nav-item.active svg {
+            fill: var(--primary-color);
+        }
+
+        /* رسالة فارغة للتبويبات البديلة */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
         }
     </style>
-    <script type="text/javascript">
-        function launchLocker() {
-            // كود قفل CPAGrip الخاص بك
-            window.location.href = "https://quartzfiles.com/1904575";
-        }
-    </script>
 </head>
 <body>
 
     <div class="app-container">
-        <div class="header">
-            <h1>Maystories ☁️</h1>
-        </div>
+        <!-- الهيدر العلوي -->
+        <header class="header">
+            <a href="#" class="header-logo">Maystories <span>☁️</span></a>
+            <button class="menu-btn" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </header>
 
-        <div class="content">
+        <!-- القائمة الجانبية (Sidebar) -->
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span style="font-weight: 700; font-size: 18px; color: var(--primary-color);">خيارات إضافية</span>
+                <span style="cursor:pointer; font-size: 20px;" onclick="toggleSidebar()">✕</span>
+            </div>
+            <nav class="sidebar-menu">
+                <div class="sidebar-item" onclick="switchTab('tab-archive')">🗂️ رفوف الملفات</div>
+                <div class="sidebar-item" onclick="switchTab('tab-saved')">🌟 الخزانة السرية</div>
+                <div class="sidebar-item" onclick="switchTab('tab-lounge')">💬 ساحة الآراء</div>
+                <div class="sidebar-item" onclick="switchTab('tab-write')">✍️ لوحة الاعتراف</div>
+            </nav>
+        </aside>
+
+        <!-- [1] تبويب الأرشيف (الرئيسية) -->
+        <main class="tab-content active" id="tab-archive">
+            <h2 class="section-title">الملفات الأكثر سخونة 🔥</h2>
 
             <!-- القصة الأولى: العباية الذهبية -->
-            <div class="story-card">
-                <div class="story-title">1. قصة "العباية الذهبية"</div>
-                <div class="story-text">
-                    تخيلوا زوجي يحبني لدرجة إنه راح لمحل عبايات وفصل لي (عباية مميزة جداً) فيها تطريز ذهبي غريب وصعب يتكرر على الأكمام، وحلف عليّ ما ألبس غيرها إذا طلعنا! وكان دائماً يمدح عبايتي هذي قدام أمه وأخواته وعمانه بكل فخر ويقول لهم: "أنا أعرف زوجتي من بين ألف حرمة.. تطريز عبايتها مافي مثله بالسوق، مستحيل أغلط فيها!".
-                    كنت طايرة من الفرحة وأحسبه حب وتميز وتملك.. لحد ذاك اليوم!
-                    
-                    رجعنا البيت وكان ينزل الأغراض من سيارته، وطلب مني بشكل عشوائي أنزل أتأكد إذا نسى شيء بالسيارة وأجيبه معي. وأنا أدور بالدرج وتحت المقاعد.. طاحت عيني على (كيس أسود مخبأ تحت مقعده).
-                    فتحته بدافع الفضول.. وشفت المصيبة اللي جمدت الدم بعروقي!!
-                    الكيس كان فيه نفس عبايتي بالضبط! نفس التطريز الذهبي ونفس القماش والريحة.. وفي ذيك اللحظة، استوعبت اللعبة القذرة كلها وعرفت ليش كان حريص ألبسها!
-                </div>
-                
-                <div class="locker-overlay">
-                    <div class="lock-box">
-                        <div class="lock-icon">🔒</div>
-                        <div class="lock-title">نهاية القصة مقفلة</div>
-                        <div class="lock-desc">أكمل أحد العروض السريعة بالأسفل لتفتح لك النهاية الصادمة والخطة القذرة التي دبرها الزوج.</div>
-                        <button class="lock-btn" onclick="launchLocker()">🔒 اضغط لعرض النهاية الصادمة</button>
+            <article class="story-card">
+                <div class="story-body">
+                    <div class="story-info">
+                        <h3 class="story-title">ملف "العباية الذهبية" (خداع ذكي وصدمة لا تخطر على بال)</h3>
+                        <p class="story-snippet">زوجي العزيز فصل لي عباية مميزة جداً بتطريز ذهبي وحلف علي ما ألبس غيرها لما نطلع، لحد ما طاحت عيني على كيس أسود مخفي تحت المقعد في سيارته وشفت شي جمد الدم بعروقي...</p>
+                    </div>
+                    <div class="story-icon-wrapper">
+                        <svg viewBox="0 0 24 24"><path d="M19 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 18H6V4h12v16z"/></svg>
                     </div>
                 </div>
-            </div>
+                <button class="read-btn" onclick="launchLocker()">كشف بقية السر 🔍</button>
+            </article>
 
             <!-- القصة الثانية: مجلد التعازي -->
-            <div class="story-card">
-                <div class="story-title">2. قصة "مجلد التعازي المسبقة"</div>
-                <div class="story-text">
-                    كنت أظن أن زوجي هو أأمن شخص لي في هذا العالم، لحد ليلة أمس..
-                    كان نايم، واحتجت لابتوبه بشكل عاجل عشان أرسل ملف لشغلي. وأنا أبحث في المجلدات، لفت انتباهي مجلد مخفي في زاوية سطح المكتب بدون اسم، مجرد نقطة ( . ).
-                    فتحت المجلد بدافع الفضول، ولقيت داخله ملف نصي واحد مكتوب عليه تاريخ الشهر الجاي!
-                    
-                    فتحت الملف.. وتجمدت في مكاني وأنا أقرأ المكتوب: 
-                    "شكر الله سعيكم جميعاً، بقلوب مؤمنة بقضاء الله وقدره، أنعي لكم وفاة زوجتي الغالية.. غيابها كسرني وأسأل الله أن يربط على قلبي".
-                    الملف كان عبارة عن مسودات لرسائل تعزية جاهزة للنشر، ومكتوب تحتها بخط صغير خطة أيام العزاء! والمصيبة؟ أنا بكامل صحتي وعافيتي وما فيني أي مرض!
-                    سمعت خطواته بالممر جاي لغرفة المكتب.. وقفلت اللابتوب بسرعة..
-                </div>
-                
-                <div class="locker-overlay">
-                    <div class="lock-box">
-                        <div class="lock-icon">🔒</div>
-                        <div class="lock-title">نهاية القصة مقفلة</div>
-                        <div class="lock-desc">أكمل التحقق بالأسفل لقراءة نهاية قصة "مجلد التعازي" وكيف قامت الزوجة بقلب السحر على الساحر.</div>
-                        <button class="lock-btn" onclick="launchLocker()">🔒 اضغط لمعرفة كيف انتهت الخطة</button>
+            <article class="story-card">
+                <div class="story-body">
+                    <div class="story-info">
+                        <h3 class="story-title">ملف "التعازي المسبقة" (المجلد السري بالكمبيوتر)</h3>
+                        <p class="story-snippet">فتحت كمبيوتر زوجي أدور على ملف ضروري لشغلي، ولقيت مجلد مخفي بشكل نقطة وبداخله نص تعزية بوفاتي مجهز ومجدول للشهر الجاي وتفاصيل العزاء بالكامل وأنا بكامل صحتي وعافيتي...</p>
+                    </div>
+                    <div class="story-icon-wrapper">
+                        <svg viewBox="0 0 24 24"><path d="M19 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 18H6V4h12v16z"/></svg>
                     </div>
                 </div>
-            </div>
+                <button class="read-btn" onclick="launchLocker()">كشف بقية السر 🔍</button>
+            </article>
 
-            <!-- القصة الثالثة: فواحة غرفة النوم -->
-            <div class="story-card">
-                <div class="story-title">3. قصة "فواحة غرفة النوم"</div>
-                <div class="story-text">
-                    من أول يوم تزوجت فيه، وأخت زوجي "حصة" تعاملني كأنني أختها الفاضلة وتغرقني بالهدايا والدعم. بمناسبة ذكرى زواجنا الأولى، أهدتني "فواحة ذكية فخمة جداً" وقالت لي: "هذي حطيها بغرفة نومك ولا تطلعينها أبداً، ريحتها تهدي الأعصاب".
-                    وفعلاً، حطيتها وبدأت المشاكل!
-                    
-                    فجأة وبدون مقدمات، تغير زوجي عليّ 180 درجة، وصار يدخل البيت وعيونه مليانة شك وكره، ويتهمني اتهامات غريبة ويقول لي: "أنا أدري وش تقولين عن أمي وأخواتي بغرفتك! سمعتك بأذني!". كنت أحلف له بالله العظيم أنني لم أقل كلمة واحدة سيئة، لكنه كان يصرخ ويصر على موقفه.
-                    وصلنا لطريق مسدود وكان يبي يطلقني.. لحد ذاك اليوم، وأنا أنظف الغرفة، طاحت الفواحة وانكسرت.. وشفت بوسطها جهاز أسود صغير جداً ببطارية مستقلة ومثبت فيه شريحة اتصال نشطة!
-                    أخت زوجي كانت تتصنت على غرفة نومنا مباشرة! ولكن كيف كان زوجي واثقاً أنه سمع كلامي المسيء بأذنه؟
-                </div>
-                
-                <div class="locker-overlay">
-                    <div class="lock-box">
-                        <div class="lock-icon">🔒</div>
-                        <div class="lock-title">نهاية القصة مقفلة</div>
-                        <div class="lock-desc">أثبت أنك مستخدم حقيقي لتكتشف الخديعة التكنولوجية وكيف كشفت الزوجة خباثة أخت زوجها بطريقة ذكية.</div>
-                        <button class="lock-btn" onclick="launchLocker()">🔒 اضغط لمعرفة حيلة أخت الزوج</button>
+            <!-- القصة الثالثة: فواحة النوم -->
+            <article class="story-card">
+                <div class="story-body">
+                    <div class="story-info">
+                        <h3 class="story-title">ملف "فواحة غرفة النوم" (أقوى قصة عن خباثة أخت الزوج)</h3>
+                        <p class="story-snippet">أخت زوجي "حصة" الملاك الحارس أهدتني فواحة ذكية وحلفت علي أحطها بغرفتنا، وفجأة انقلبت حياتنا جحيم وشك وصار زوجي يتهمني بكلام سيء يقول سمعته بأذني لحد ما انكسرت الفواحة وانفجر المستور...</p>
+                    </div>
+                    <div class="story-icon-wrapper">
+                        <svg viewBox="0 0 24 24"><path d="M19 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 18H6V4h12v16z"/></svg>
                     </div>
                 </div>
-            </div>
+                <button class="read-btn" onclick="launchLocker()">كشف بقية السر 🔍</button>
+            </article>
+        </main>
 
+        <!-- [2] تبويب محفوظاتي (المفضلة) -->
+        <div class="tab-content" id="tab-saved">
+            <div class="empty-state">
+                <div class="empty-state-icon">🌟</div>
+                <h3>خزانتك السرية فارغة</h3>
+                <p>القصص التي تضع عليها علامة حفظ ستظهر لك هنا لتصل إليها مباشرة لاحقاً.</p>
+            </div>
         </div>
+
+        <!-- [3] تبويب ديوانية Maystories (المجتمع) -->
+        <div class="tab-content" id="tab-lounge">
+            <div class="empty-state">
+                <div class="empty-state-icon">💬</div>
+                <h3>الديوانية مغلقة حالياً</h3>
+                <p>نقاشات الزوار حول الأسرار والاعترافات ستبدأ قريباً فور اكتمال التحديث الجديد.</p>
+            </div>
+        </div>
+
+        <!-- [4] تبويب اعترافك (كتابة قصة) -->
+        <div class="tab-content" id="tab-write">
+            <h2 class="section-title">انشر سرّك الغامض 🤫</h2>
+            <div class="submit-box">
+                <div class="input-group">
+                    <input type="text" class="input-field" placeholder="عنوان اعترافك هنا...">
+                </div>
+                <div class="input-group">
+                    <textarea class="input-field textarea-field" placeholder="اكتب تفاصيل السر بكل حرية وبشكل مجهول بالكامل..."></textarea>
+                </div>
+                <button class="submit-btn" onclick="submitSecret()">
+                    <span>إرسال بشكل مجهول 🚀</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- شريط التنقل السفلي الفخم (طابع التطبيقات بالكامل) -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" onclick="switchTab('tab-archive')" id="nav-archive">
+                <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                <span>الأرشيف</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('tab-saved')" id="nav-saved">
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <span>محفوظاتي</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('tab-lounge')" id="nav-lounge">
+                <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                <span>الديوانية</span>
+            </button>
+            <button class="nav-item" onclick="switchTab('tab-write')" id="nav-write">
+                <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                <span>اعترافك</span>
+            </button>
+        </nav>
     </div>
 
+    <script type="text/javascript">
+        // كود تحويل العروض (CPAGrip)
+        function launchLocker() {
+            window.location.href = "https://quartzfiles.com/1904575";
+        }
+
+        // دالة التبديل بين التبويبات السفلية بشكل ناعم
+        function switchTab(tabId) {
+            // إخفاء كل الصفحات
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // إلغاء تفعيل كل أزرار القائمة السفلية
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            // تفعيل الصفحة المطلوبة والزر المطلوب
+            document.getElementById(tabId).classList.add('active');
+            
+            const btnId = tabId.replace('tab-', 'nav-');
+            document.getElementById(btnId).classList.add('active');
+
+            // إغلاق القائمة الجانبية تلقائياً في حال كانت مفتوحة
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+
+            // الصعود لأعلى الصفحة تلقائياً
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // دالة إظهار وإخفاء القائمة الجانبية
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // دالة إرسال السر بشكل وهمي
+        function submitSecret() {
+            alert("تم إرسال سرك وتشفيره بالكامل بنجاح مجهول! سنقوم بمراجعته ونشره قريباً في الأرشيف.");
+            switchTab('tab-archive');
+        }
+    </script>
 </body>
 </html>

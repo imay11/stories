@@ -46,14 +46,16 @@
         .content {
             padding: 20px;
             flex: 1;
-            padding-bottom: 80px;
+            padding-bottom: 40px;
         }
         .story-card {
             background: #fff;
             border: 1px solid #e2e8f0;
             border-radius: 16px;
             padding: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
         }
         .story-title {
             font-size: 18px;
@@ -61,59 +63,59 @@
             font-weight: 700;
             margin-bottom: 12px;
             line-height: 1.4;
+            border-right: 4px solid #3182ce;
+            padding-right: 10px;
         }
         .story-text {
-            font-size: 15px;
+            font-size: 14px;
             color: #4a5568;
             line-height: 1.8;
             white-space: pre-line;
+            margin-bottom: 15px;
         }
         .locker-overlay {
-            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.95) 40%, rgba(255,255,255,1) 100%);
-            padding: 40px 20px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.95) 20%, rgba(255,255,255,1) 100%);
+            padding: 30px 15px 15px 15px;
             text-align: center;
-            margin-top: -100px;
+            margin-top: -80px;
             position: relative;
             z-index: 5;
-            border-radius: 0 0 16px 16px;
         }
         .lock-box {
             background: #ffffff;
             border: 1px solid #edf2f7;
-            border-radius: 20px;
-            padding: 30px 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            max-width: 340px;
-            margin: 0 auto;
+            border-radius: 16px;
+            padding: 20px 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.06);
         }
         .lock-icon {
-            font-size: 45px;
+            font-size: 30px;
             color: #dd6b20;
-            margin-bottom: 15px;
-        }
-        .lock-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #2d3748;
             margin-bottom: 10px;
         }
+        .lock-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
         .lock-desc {
-            font-size: 13px;
+            font-size: 12px;
             color: #718096;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             line-height: 1.5;
         }
         .lock-btn {
             background-color: #3182ce;
             color: white;
             border: none;
-            padding: 14px 30px;
-            font-size: 15px;
+            padding: 12px 20px;
+            font-size: 14px;
             font-weight: 700;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 4px 12px rgba(49,130,206,0.3);
+            box-shadow: 0 4px 10px rgba(49,130,206,0.25);
             transition: background 0.2s;
         }
         .lock-btn:hover {
@@ -122,7 +124,7 @@
     </style>
     <script type="text/javascript">
         function launchLocker() {
-            // هذا رابط القفل الخاص بك من CPAGrip
+            // كود قفل CPAGrip الخاص بك
             window.location.href = "https://quartzfiles.com/1904575";
         }
     </script>
@@ -135,28 +137,75 @@
         </div>
 
         <div class="content">
+
+            <!-- القصة الأولى: العباية الذهبية -->
             <div class="story-card">
-                <div class="story-title">قصة "العباية الذهبية" (خداع ذكي وصدمة لا تخطر على بال)</div>
+                <div class="story-title">1. قصة "العباية الذهبية"</div>
                 <div class="story-text">
-                    تخيلوا زوجي يحبني لدرجة إنه راح لمحل عبايات وفصل لي (عباية مميزة جداً) فيها تطريز ذهبي غريب وصعب يتكرر على الأكمام، وحلف عليّ ما ألبس غيرها إذا طلعنا! 
-                    وكان دائماً يمدح عبايتي هذي قدام أمه وأخواته وعمانه بكل فخر ويقول لهم: "أنا أعرف زوجتي من بين ألف حرمة.. تطريز عبايتها مافي مثله بالسوق، مستحيل أغلط فيها!". 
-                    كنت طايرة من الفرحة وأحسبه حب وتميز وتملك.. لحد ذاك اليوم! 
+                    تخيلوا زوجي يحبني لدرجة إنه راح لمحل عبايات وفصل لي (عباية مميزة جداً) فيها تطريز ذهبي غريب وصعب يتكرر على الأكمام، وحلف عليّ ما ألبس غيرها إذا طلعنا! وكان دائماً يمدح عبايتي هذي قدام أمه وأخواته وعمانه بكل فخر ويقول لهم: "أنا أعرف زوجتي من بين ألف حرمة.. تطريز عبايتها مافي مثله بالسوق، مستحيل أغلط فيها!".
+                    كنت طايرة من الفرحة وأحسبه حب وتميز وتملك.. لحد ذاك اليوم!
                     
-                    رجعنا البيت وكان ينزل الأغراض من سيارته، وطلب مني بشكل عشوائي أنزل أتأكد إذا نسى شيء بالسيارة وأجيبه معي. وأنا أدور بالدرج وتحت المقاعد.. طاحت عيني على (كيس أسود مخبأ تحت مقعده). 
-                    فتحته بدافع الفضول.. وشفت المصيبة اللي جمدت الدم بعروقي!! 
+                    رجعنا البيت وكان ينزل الأغراض من سيارته، وطلب مني بشكل عشوائي أنزل أتأكد إذا نسى شيء بالسيارة وأجيبه معي. وأنا أدور بالدرج وتحت المقاعد.. طاحت عيني على (كيس أسود مخبأ تحت مقعده).
+                    فتحته بدافع الفضول.. وشفت المصيبة اللي جمدت الدم بعروقي!!
                     الكيس كان فيه نفس عبايتي بالضبط! نفس التطريز الذهبي ونفس القماش والريحة.. وفي ذيك اللحظة، استوعبت اللعبة القذرة كلها وعرفت ليش كان حريص ألبسها!
                 </div>
                 
                 <div class="locker-overlay">
                     <div class="lock-box">
                         <div class="lock-icon">🔒</div>
-                        <div class="lock-title">المحتوى مقفل</div>
-                        <div class="lock-desc">يرجى تأكيد هويتك في الصفحة التالية لعرض الجزء الثاني والنهاية الصادمة لهذه اللعبة القذرة.</div>
-                        <button class="lock-btn" onclick="launchLocker()">🔒 اضغط هنا لمعرفة النهاية الصادمة</button>
+                        <div class="lock-title">نهاية القصة مقفلة</div>
+                        <div class="lock-desc">أكمل أحد العروض السريعة بالأسفل لتفتح لك النهاية الصادمة والخطة القذرة التي دبرها الزوج.</div>
+                        <button class="lock-btn" onclick="launchLocker()">🔒 اضغط لعرض النهاية الصادمة</button>
                     </div>
                 </div>
-                
             </div>
+
+            <!-- القصة الثانية: مجلد التعازي -->
+            <div class="story-card">
+                <div class="story-title">2. قصة "مجلد التعازي المسبقة"</div>
+                <div class="story-text">
+                    كنت أظن أن زوجي هو أأمن شخص لي في هذا العالم، لحد ليلة أمس..
+                    كان نايم، واحتجت لابتوبه بشكل عاجل عشان أرسل ملف لشغلي. وأنا أبحث في المجلدات، لفت انتباهي مجلد مخفي في زاوية سطح المكتب بدون اسم، مجرد نقطة ( . ).
+                    فتحت المجلد بدافع الفضول، ولقيت داخله ملف نصي واحد مكتوب عليه تاريخ الشهر الجاي!
+                    
+                    فتحت الملف.. وتجمدت في مكاني وأنا أقرأ المكتوب: 
+                    "شكر الله سعيكم جميعاً، بقلوب مؤمنة بقضاء الله وقدره، أنعي لكم وفاة زوجتي الغالية.. غيابها كسرني وأسأل الله أن يربط على قلبي".
+                    الملف كان عبارة عن مسودات لرسائل تعزية جاهزة للنشر، ومكتوب تحتها بخط صغير خطة أيام العزاء! والمصيبة؟ أنا بكامل صحتي وعافيتي وما فيني أي مرض!
+                    سمعت خطواته بالممر جاي لغرفة المكتب.. وقفلت اللابتوب بسرعة..
+                </div>
+                
+                <div class="locker-overlay">
+                    <div class="lock-box">
+                        <div class="lock-icon">🔒</div>
+                        <div class="lock-title">نهاية القصة مقفلة</div>
+                        <div class="lock-desc">أكمل التحقق بالأسفل لقراءة نهاية قصة "مجلد التعازي" وكيف قامت الزوجة بقلب السحر على الساحر.</div>
+                        <button class="lock-btn" onclick="launchLocker()">🔒 اضغط لمعرفة كيف انتهت الخطة</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- القصة الثالثة: فواحة غرفة النوم -->
+            <div class="story-card">
+                <div class="story-title">3. قصة "فواحة غرفة النوم"</div>
+                <div class="story-text">
+                    من أول يوم تزوجت فيه، وأخت زوجي "حصة" تعاملني كأنني أختها الفاضلة وتغرقني بالهدايا والدعم. بمناسبة ذكرى زواجنا الأولى، أهدتني "فواحة ذكية فخمة جداً" وقالت لي: "هذي حطيها بغرفة نومك ولا تطلعينها أبداً، ريحتها تهدي الأعصاب".
+                    وفعلاً، حطيتها وبدأت المشاكل!
+                    
+                    فجأة وبدون مقدمات، تغير زوجي عليّ 180 درجة، وصار يدخل البيت وعيونه مليانة شك وكره، ويتهمني اتهامات غريبة ويقول لي: "أنا أدري وش تقولين عن أمي وأخواتي بغرفتك! سمعتك بأذني!". كنت أحلف له بالله العظيم أنني لم أقل كلمة واحدة سيئة، لكنه كان يصرخ ويصر على موقفه.
+                    وصلنا لطريق مسدود وكان يبي يطلقني.. لحد ذاك اليوم، وأنا أنظف الغرفة، طاحت الفواحة وانكسرت.. وشفت بوسطها جهاز أسود صغير جداً ببطارية مستقلة ومثبت فيه شريحة اتصال نشطة!
+                    أخت زوجي كانت تتصنت على غرفة نومنا مباشرة! ولكن كيف كان زوجي واثقاً أنه سمع كلامي المسيء بأذنه؟
+                </div>
+                
+                <div class="locker-overlay">
+                    <div class="lock-box">
+                        <div class="lock-icon">🔒</div>
+                        <div class="lock-title">نهاية القصة مقفلة</div>
+                        <div class="lock-desc">أثبت أنك مستخدم حقيقي لتكتشف الخديعة التكنولوجية وكيف كشفت الزوجة خباثة أخت زوجها بطريقة ذكية.</div>
+                        <button class="lock-btn" onclick="launchLocker()">🔒 اضغط لمعرفة حيلة أخت الزوج</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 

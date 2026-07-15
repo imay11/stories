@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maystories - اعترافات وأسرار</title>
+    <title>Maystories - قصص واعترافات</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -12,7 +12,7 @@
             --primary-color: #1e90ff;
             --text-dark: #1a1a2e;
             --text-muted: #7e7e9a;
-            --accent-orange: #ff6b6b;
+            --accent-blue-light: #eaf3ff;
         }
 
         body {
@@ -39,7 +39,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            padding-bottom: 90px; /* مسافة لشريط التنقل السفلي */
+            padding-bottom: 90px;
             box-sizing: border-box;
         }
 
@@ -177,17 +177,15 @@
             padding-right: 5px;
         }
 
-        /* بطاقات القصص الفخمة المتسلسلة مع القفل مدمج بالداخل */
+        /* بطاقات القصص في الرئيسية (مطابقة للصورة تماماً) */
         .story-card {
             background: var(--card-bg);
             border-radius: 20px;
             padding: 20px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.02);
             display: flex;
             flex-direction: column;
-            position: relative;
-            overflow: hidden;
         }
 
         .story-body {
@@ -195,7 +193,7 @@
             justify-content: space-between;
             align-items: flex-start;
             gap: 15px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .story-info {
@@ -211,13 +209,16 @@
         }
 
         .story-snippet {
-            font-size: 13.5px;
+            font-size: 13px;
             color: var(--text-muted);
-            line-height: 1.8;
-            margin: 0;
+            line-height: 1.7;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        /* الأيقونة الرمادية الجانبية للقصة */
+        /* الأيقونة الرمادية الجانبية للقصة كالكتاب */
         .story-icon-wrapper {
             background-color: #f0f2f6;
             width: 55px;
@@ -235,53 +236,107 @@
             fill: #9ea3b2;
         }
 
-        /* صندوق القفل المدمج مباشرة تحت نص القصة داخل نفس الكارد */
-        .locker-inline {
-            background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(243,244,249,0.4) 30%, #f7f9fc 100%);
-            border: 1px solid #edf2f7;
-            border-radius: 16px;
-            padding: 18px 15px;
-            margin-top: 15px;
+        /* الزر الأزرق المطابق للصورة تماماً */
+        .read-btn {
+            background-color: var(--accent-blue-light);
+            color: var(--primary-color);
+            border: none;
+            padding: 10px 24px;
+            font-size: 13.5px;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            align-self: center;
+            transition: 0.2s;
             text-align: center;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.01);
+            width: fit-content;
+        }
+
+        .read-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* صفحة عرض القصة الكاملة المخصصة */
+        .story-view-container {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            margin-bottom: 20px;
+        }
+
+        .story-view-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f0f2f6;
+            padding-bottom: 15px;
+        }
+
+        .story-view-content {
+            font-size: 14.5px;
+            color: #33334b;
+            line-height: 1.9;
+            margin-bottom: 25px;
+            white-space: pre-line; /* يحافظ على قفزات الأسطر لتسلسل القراءة */
+        }
+
+        /* زر الرجوع للأرشيف */
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* صندوق القفل داخل القصة */
+        .locker-box {
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, #f7f9fc 100%);
+            border: 1px dashed #cbd5e0;
+            border-radius: 16px;
+            padding: 25px 20px;
+            text-align: center;
+            margin-top: 20px;
         }
 
         .lock-icon {
-            font-size: 26px;
-            color: #dd6b20;
-            margin-bottom: 8px;
+            font-size: 32px;
+            margin-bottom: 10px;
         }
 
         .lock-title {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .lock-desc {
-            font-size: 12px;
+            font-size: 12.5px;
             color: var(--text-muted);
-            margin-bottom: 12px;
-            line-height: 1.5;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
 
-        .lock-btn {
+        .lock-action-btn {
             background-color: var(--primary-color);
-            color: white;
+            color: #ffffff;
             border: none;
-            padding: 12px 20px;
-            font-size: 13px;
+            padding: 12px 25px;
+            font-size: 14px;
             font-weight: 700;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 4px 10px rgba(30,144,255,0.2);
-            transition: background 0.2s;
-        }
-
-        .lock-btn:hover {
-            background-color: #187bcd;
+            box-shadow: 0 4px 12px rgba(30,144,255,0.25);
         }
 
         /* صفحة مشاركة الأسرار (الاعترافات) */
@@ -402,7 +457,7 @@
     <div class="app-container">
         <!-- الهيدر العلوي -->
         <header class="header">
-            <a href="#" class="header-logo">Maystories <span>☁️</span></a>
+            <a href="#" class="header-logo" onclick="switchTab('tab-archive')">Maystories <span>☁️</span></a>
             <button class="menu-btn" onclick="toggleSidebar()">
                 <span></span>
                 <span></span>
@@ -414,80 +469,85 @@
         <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <span style="font-weight: 700; font-size: 18px; color: var(--primary-color);">خيارات إضافية</span>
+                <span style="font-weight: 700; font-size: 18px; color: var(--primary-color);">قائمة الخيارات</span>
                 <span style="cursor:pointer; font-size: 20px;" onclick="toggleSidebar()">✕</span>
             </div>
             <nav class="sidebar-menu">
-                <div class="sidebar-item" onclick="switchTab('tab-archive')">🗂️ رفوف القصص</div>
+                <div class="sidebar-item" onclick="switchTab('tab-archive')">📖 رفوف القصص</div>
                 <div class="sidebar-item" onclick="switchTab('tab-saved')">🌟 الخزانة السرية</div>
                 <div class="sidebar-item" onclick="switchTab('tab-lounge')">💬 ساحة الآراء</div>
                 <div class="sidebar-item" onclick="switchTab('tab-write')">✍️ لوحة الاعتراف</div>
             </nav>
         </aside>
 
-        <!-- [1] تبويب الأرشيف (الرئيسية) -->
+        <!-- [1] تبويب الأرشيف (الرئيسية وعرض القصص) -->
         <main class="tab-content active" id="tab-archive">
-            <h2 class="section-title">القصص الأكثر سخونة 🔥</h2>
+            
+            <!-- واجهة قائمة القصص (الرئيسية) -->
+            <div id="stories-list-view">
+                <h2 class="section-title">القصص الشائعة الآن 🔥</h2>
 
-            <!-- القصة الأولى: العباية الذهبية -->
-            <article class="story-card">
-                <div class="story-body">
-                    <div class="story-info">
-                        <h3 class="story-title">قصة "العباية الذهبية" (خداع ذكي وصدمة لا تخطر على بال)</h3>
-                        <p class="story-snippet">زوجي العزيز فصل لي عباية مميزة جداً بتطريز ذهبي وحلف علي ما ألبس غيرها لما نطلع، لحد ما طاحت عيني على كيس أسود مخفي تحت المقعد في سيارته وشفت شي جمد الدم بعروقي وشفت نفس عبايتي بالضبط بالداخل واستوعبت اللعبة كلها...</p>
+                <!-- قصة الدرايف ثرو -->
+                <article class="story-card">
+                    <div class="story-body">
+                        <div class="story-info">
+                            <h3 class="story-title">قصة الدرايف ثرو! الساعه 1 منتصف الليل</h3>
+                            <p class="story-snippet">الساعة 1 بالليل أنا وصديقتي راجعين البيت واشتهينا قهوة. دخلنا درايف ثرو حق كافيه معروف. وما كان فيه إلا سيارة وحدة أمامنا هادية وبشكل مريب فجأة فتح السائق الباب وصار شي...</p>
+                        </div>
+                        <div class="story-icon-wrapper">
+                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        </div>
                     </div>
-                    <div class="story-icon-wrapper">
-                        <svg viewBox="0 0 24 24"><path d="M19 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 18H6V4h12v16z"/></svg>
-                    </div>
-                </div>
-                <!-- القفل مدمج كجزء متسلسل مباشرة بالداخل -->
-                <div class="locker-inline">
-                    <div class="lock-icon">🔒</div>
-                    <div class="lock-title">نهاية القصة مقفلة</div>
-                    <div class="lock-desc">أكمل أحد التحققات السريعة لتتابع قراءة نهاية اللعبة الخبيثة التي دبرها الزوج.</div>
-                    <button class="lock-btn" onclick="launchLocker()">كشف بقية السر 🔍</button>
-                </div>
-            </article>
+                    <button class="read-btn" onclick="openFullStory('driveThru')">قراءة القصة كاملة</button>
+                </article>
 
-            <!-- القصة الثانية: مجلد التعازي -->
-            <article class="story-card">
-                <div class="story-body">
-                    <div class="story-info">
-                        <h3 class="story-title">قصة "التعازي المسبقة" (المجلد السري بالكمبيوتر)</h3>
-                        <p class="story-snippet">فتحت كمبيوتر زوجي أدور على ملف ضروري لشغلي، ولقيت مجلد مخفي بشكل نقطة وبداخله نص تعزية بوفاتي مجهز ومجدول للشهر الجاي وتفاصيل العزاء بالكامل وأنا بكامل صحتي وعافيتي وسمعت خطواته تقترب...</p>
+                <!-- قصة طلعة الكوفي -->
+                <article class="story-card">
+                    <div class="story-body">
+                        <div class="story-info">
+                            <h3 class="story-title">قصة "طلعة الكوفي" (رعب خيانة الثقة)</h3>
+                            <p class="story-snippet">أبوي إنسان جداً صارم، وممنوع أطلع لأماكن معينة. صاحبتي أقنعتني نطلع بدون علمه لكوفي مشهور وبعيد في زاوية مظلمة، وأنا هناك لمحت شخص لابس نفس شماغ أبوي وبنفس مشيته يتجه لطاولتنا فجأة وعيونه مليانة غضب...</p>
+                        </div>
+                        <div class="story-icon-wrapper">
+                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        </div>
                     </div>
-                    <div class="story-icon-wrapper">
-                        <svg viewBox="0 0 24 24"><path d="M19 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 18H6V4h12v16z"/></svg>
-                    </div>
-                </div>
-                <!-- القفل مدمج كجزء متسلسل مباشرة بالداخل -->
-                <div class="locker-inline">
-                    <div class="lock-icon">🔒</div>
-                    <div class="lock-title">نهاية القصة مقفلة</div>
-                    <div class="lock-desc">يرجى تخطي التحقق بالأسفل لتكتشف كيف تخلصت الزوجة من المخطط وقلبت السحر على الساحر.</div>
-                    <button class="lock-btn" onclick="launchLocker()">كشف بقية السر 🔍</button>
-                </div>
-            </article>
+                    <button class="read-btn" onclick="openFullStory('coffeeStory')">قراءة القصة كاملة</button>
+                </article>
 
-            <!-- القصة الثالثة: فواحة النوم -->
-            <article class="story-card">
-                <div class="story-body">
-                    <div class="story-info">
-                        <h3 class="story-title">قصة "فواحة غرفة النوم" (خباثة أخت الزوج)</h3>
-                        <p class="story-snippet">أخت زوجي "حصة" الملاك الحارس أهدتني فواحة وحلفت علي أحطها بغرفتنا، وفجأة انقلبت حياتنا جحيم وشك وصار زوجي يتهمني بكلام يقول سمعته بأذني لحد ما انكسرت الفواحة واكتشفت بداخلها جهاز تصنت بشريحة اتصال...</p>
+                <!-- قصة الحبيب الوهمي -->
+                <article class="story-card">
+                    <div class="story-body">
+                        <div class="story-info">
+                            <h3 class="story-title">قصة "الحبيب الوهمي" (استغلال عاطفي وتلاعب نفسي مرعب)</h3>
+                            <p class="story-snippet">صديقة عمري هي الوحيدة اللي تعرف إني أكلم شخص بـ "سناب شات" من سنتين ووعدني بالزواج أول ما يرجع من بعثته. اليوم صديقتي نسيت جوالها مفتوح على طاولة الطعام وجتني رسالة منه على جوالي، وبنفس الثانية اهتز جوالها ونورت الشاشة...</p>
+                        </div>
+                        <div class="story-icon-wrapper">
+                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        </div>
                     </div>
-                    <div class="story-icon-wrapper">
-                        <svg viewBox="0 0 24 24"><path d="M19 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 18H6V4h12v16z"/></svg>
+                    <button class="read-btn" onclick="openFullStory('fakeLover')">قراءة القصة كاملة</button>
+                </article>
+            </div>
+
+            <!-- صفحة عرض تفاصيل القصة الفردية (مخفية وتظهر عند النقر) -->
+            <div id="story-detail-view" style="display: none;">
+                <button class="back-btn" onclick="showStoriesList()">◀ العودة للقصص</button>
+                <div class="story-view-container">
+                    <h3 class="story-view-title" id="detail-title">عنوان القصة</h3>
+                    <div class="story-view-content" id="detail-text">
+                        محتوى القصة المسترسل يظهر هنا بالكامل...
+                    </div>
+                    <!-- قفل المحتوى المدمج في النهاية -->
+                    <div class="locker-box">
+                        <div class="lock-icon">🔒</div>
+                        <div class="lock-title">متبقي جزء بسيط لمعرفة الصدمة النهائية!</div>
+                        <div class="lock-desc">لإكمال قراءة الجزء الأخير المثير من القصة، يرجى إثبات أنك لست برنامج روبوت عبر إكمال أحد العروض السريعة بالأسفل.</div>
+                        <button class="lock-action-btn" onclick="launchLocker()">فتح بقية القصة الصادمة 🔓</button>
                     </div>
                 </div>
-                <!-- القفل مدمج كجزء متسلسل مباشرة بالداخل -->
-                <div class="locker-inline">
-                    <div class="lock-icon">🔒</div>
-                    <div class="lock-title">نهاية القصة مقفلة</div>
-                    <div class="lock-desc">تخطى التحقق الأمني لتكتشف الخدعة التكنولوجية وكيف كشفتها الزوجة وعاقبتها بطريقتها.</div>
-                    <button class="lock-btn" onclick="launchLocker()">كشف بقية السر 🔍</button>
-                </div>
-            </article>
+            </div>
+
         </main>
 
         <!-- [2] تبويب محفوظاتي (المفضلة) -->
@@ -495,7 +555,7 @@
             <div class="empty-state">
                 <div class="empty-state-icon">🌟</div>
                 <h3>خزانتك السرية فارغة</h3>
-                <p>القصص التي تضع عليها علامة حفظ ستظهر لك هنا لتصل إليها مباشرة لاحقاً.</p>
+                <p>القصص التي تحفظها ستظهر لك هنا لتصل إليها لاحقاً بسهولة.</p>
             </div>
         </div>
 
@@ -503,20 +563,20 @@
         <div class="tab-content" id="tab-lounge">
             <div class="empty-state">
                 <div class="empty-state-icon">💬</div>
-                <h3>الديوانية مغلقة حالياً</h3>
-                <p>نقاشات الزوار حول الأسرار والاعترافات ستبدأ قريباً فور اكتمال التحديث الجديد.</p>
+                <h3>الديوانية مغلقة مؤقتاً</h3>
+                <p>النقاشات وتبادل الآراء حول القصص المٹيرة ستتوفر في التحديث القادم.</p>
             </div>
         </div>
 
         <!-- [4] تبويب اعترافك (كتابة قصة) -->
         <div class="tab-content" id="tab-write">
-            <h2 class="section-title">انشر سرّك الغامض 🤫</h2>
+            <h2 class="section-title">انشر قصتك الغامضة 🤫</h2>
             <div class="submit-box">
                 <div class="input-group">
-                    <input type="text" class="input-field" placeholder="عنوان اعترافك هنا...">
+                    <input type="text" class="input-field" placeholder="عنوان قصتك هنا...">
                 </div>
                 <div class="input-group">
-                    <textarea class="input-field textarea-field" placeholder="اكتب تفاصيل السر بكل حرية وبشكل مجهول بالكامل..."></textarea>
+                    <textarea class="input-field textarea-field" placeholder="اكتب تفاصيل قصتك بكل حرية وبشكل مجهول وسري بالكامل..."></textarea>
                 </div>
                 <button class="submit-btn" onclick="submitSecret()">
                     <span>إرسال بشكل مجهول 🚀</span>
@@ -524,58 +584,116 @@
             </div>
         </div>
 
-        <!-- شريط التنقل السفلي الفخم (طابع التطبيقات بالكامل) -->
+        <!-- شريط التنقل السفلي الفخم -->
         <nav class="bottom-nav">
             <button class="nav-item active" onclick="switchTab('tab-archive')" id="nav-archive">
                 <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-                <span>الأرشيف</span>
+                <span>الرئيسية</span>
             </button>
             <button class="nav-item" onclick="switchTab('tab-saved')" id="nav-saved">
                 <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                <span>محفوظاتي</span>
+                <span>المفضلة</span>
             </button>
             <button class="nav-item" onclick="switchTab('tab-lounge')" id="nav-lounge">
                 <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
-                <span>الديوانية</span>
+                <span>المجتمع</span>
             </button>
             <button class="nav-item" onclick="switchTab('tab-write')" id="nav-write">
                 <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-                <span>اعترافك</span>
+                <span>كتابة</span>
             </button>
         </nav>
     </div>
 
     <script type="text/javascript">
-        // كود تحويل العروض (CPAGrip)
+        // قاعدة بيانات نصوص القصص الكاملة التي تظهر داخل الصفحة الفرعية
+        const database = {
+            driveThru: {
+                title: 'قصة الدرايف ثرو! الساعه 1 منتصف الليل',
+                text: `الساعة 1 بالليل أنا وصديقتي راجعين البيت بعد يوم طويل ومرهق، واشتهينا قهوة تعدل المزاج قبل النوم. قررنا نمر على درايف ثرو لكافيه معروف على أطراف الحي. 
+
+الشارع كان شبة خالي تماماً والهدوء يلف المكان، وما كان فيه بالطابور غير سيارة سوداء وحدة مغلّفة بالكامل بالكامل واقفه قدامنا عند شباك الطلب.
+
+الغريب إنها كانت واقفة بدون حركة لدقائق طويلة، وما استلموا أي طلب ولا تحركوا شبر واحد. وبدأنا نشعر بالتوتر والملل وصرت أطالع في صديقتي بتردد. 
+
+وفجأة وبدون أي مقدمات، انفتح باب السائق بقوة ونزل منها شخص ضخم يرتدي معطفاً أسوداً طويلاً، ولم يلتفت جهة الكافيه إطلاقاً بل استدار بجسده كاملاً ومشى بخطوات سريعة ومرعبة باتجاه سيارتنا مباشرة وهو يخرج شيئاً معدنياً لامعاً من جيبه الخلفي...`
+            },
+            coffeeStory: {
+                title: 'قصة "طلعة الكوفي" (رعب خيانة الثقة)',
+                text: `أبوي إنسان محافظ وجداً صارم في قراراته، وكان دائماً يمنعني من الذهاب للمقاهي المزدحمة أو الخروج ليلاً بدون محرم أو إذن مسبق. 
+
+في أحد الأيام اتصلت بي صديقة مقربة جداً وأقنعتني بأسلوبها الساحر إننا نطلع "سهرة كوفي" سريعة في مكان هادئ وبعيد بالكامل عن الأنظار عشان ما أحد يشوفنا، وحلفت علي ألا أخبر أحداً وأن أخرج خلسة.
+
+استسلمت لإلحاحها الشديد وخرجت معها، وذهبنا إلى كوفي يقع في زاوية معتمة وشبه معزولة من المدينة. كنا نتحدث ونضحك حتى لمحت فجأة من خلف الزجاج الخارجي شخصاً يترجل من سيارته ويرتدي نفس شماغ أبوي تماماً وبنفس تفاصيل مشيته وثقته المهيبة.
+
+بدأ يتجه نحو الطاولة التي نجلس عليها مباشرة، وكان رأسه منخفضاً ويقترب بخطوات واثقة وسريعة، وعقلي تشتت بالكامل وضربات قلبي تسارعت كأنها ستنفجر، وعندما وقف على رأس الطاولة ورفع رأسه حدثت الصدمة المرعبة...`
+            },
+            fakeLover: {
+                title: 'قصة "الحبيب الوهمي" (استغلال عاطفي وتلاعب نفسي مرعب)',
+                text: `صديقة عمري التي تشاركني تفاصيل غرفتي ويومي هي الوحيدة في هذا العالم التي تعرف إني على علاقة عاطفية بشخص تعرفت عليه في تطبيق "سناب شات" منذ سنتين.
+
+كان يغدقني بالاهتمام والوعود، ووعدني بالتقدم لخطبتي رسمياً فور انتهاء بعثته الدراسية في الخارج وعودته للبلاد، وكنت أعيش على هذا الأمل وأحكي لصديقتي كل كلمة وتفصيل يقولها لي.
+
+في أحد الأيام كنا نجلس سوياً في منزلي، وذهبت صديقتي للمطبخ لإحضار بعض المشروبات وتركت هاتفها مفتوحاً دون قصد على طاولة الطعام بجانبي. 
+
+في نفس اللحظة أرسلت لحبيبي رسالة عتاب بسيطة على جوالي، وفجأة وبذات الثانية تماماً اهتز هاتف صديقتي المفتوح بجانبي ونورت شاشته لتعرض إشعاراً مرعباً جداً كشف لي حقيقة السنتين الماضيتين بالكامل...`
+            }
+        };
+
+        // دالة لفتح صفحة القصة الكاملة
+        function openFullStory(storyId) {
+            const storyData = database[storyId];
+            if (storyData) {
+                // تعبئة البيانات في الصفحة الفرعية
+                document.getElementById('detail-title').innerText = storyData.title;
+                document.getElementById('detail-text').innerText = storyData.text;
+
+                // إخفاء القائمة الرئيسية وإظهار واجهة تفاصيل القصة
+                document.getElementById('stories-list-view').style.display = 'none';
+                document.getElementById('story-detail-view').style.display = 'block';
+
+                // الصعود لأعلى الصفحة بسلاسة ليقرأ العميل من البداية
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // دالة العودة لقائمة القصص بالرئيسية
+        function showStoriesList() {
+            document.getElementById('story-detail-view').style.display = 'none';
+            document.getElementById('stories-list-view').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // تحويل العميل لعروض الـ CPA (رابط القفل الخاص بك)
         function launchLocker() {
             window.location.href = "https://quartzfiles.com/1904575";
         }
 
         // دالة التبديل بين التبويبات السفلية بشكل ناعم
         function switchTab(tabId) {
-            // إخفاء كل الصفحات
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
 
-            // إلغاء تفعيل كل أزرار القائمة السفلية
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(item => item.classList.remove('active'));
 
-            // تفعيل الصفحة المطلوبة والزر المطلوب
             document.getElementById(tabId).classList.add('active');
             
             const btnId = tabId.replace('tab-', 'nav-');
             document.getElementById(btnId).classList.add('active');
 
-            // إغلاق القائمة الجانبية تلقائياً في حال كانت مفتوحة
+            // عند العودة لتبويب الرئيسية، نضمن عرض القائمة وإخفاء تفاصيل القصص المفتوحة سابقاً
+            if (tabId === 'tab-archive') {
+                showStoriesList();
+            }
+
             document.getElementById('sidebar').classList.remove('active');
             document.getElementById('sidebarOverlay').classList.remove('active');
 
-            // الصعود لأعلى الصفحة تلقائياً
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // دالة إظهار وإخفاء القائمة الجانبية
+        // التحكم بالقائمة الجانبية
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
@@ -583,9 +701,9 @@
             overlay.classList.toggle('active');
         }
 
-        // دالة إرسال السر بشكل وهمي
+        // إرسال قصة وهمي
         function submitSecret() {
-            alert("تم إرسال قصتك وتشفيرها بالكامل بنجاح مجهول! سنقوم بمراجعتها ونشرها قريباً في الأرشيف.");
+            alert("تم إرسال قصتك بنجاح مجهول! سنقوم بمراجعتها ونشرها قريباً في الأرشيف.");
             switchTab('tab-archive');
         }
     </script>

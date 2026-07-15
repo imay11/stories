@@ -177,16 +177,17 @@
             padding-right: 5px;
         }
 
-        /* بطاقات القصص الفخمة (تصميم الصورة الأولى تماماً) */
+        /* بطاقات القصص الفخمة المتسلسلة مع القفل مدمج بالداخل */
         .story-card {
             background: var(--card-bg);
             border-radius: 20px;
             padding: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.02);
             display: flex;
             flex-direction: column;
             position: relative;
+            overflow: hidden;
         }
 
         .story-body {
@@ -194,7 +195,7 @@
             justify-content: space-between;
             align-items: flex-start;
             gap: 15px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .story-info {
@@ -210,13 +211,10 @@
         }
 
         .story-snippet {
-            font-size: 13px;
+            font-size: 13.5px;
             color: var(--text-muted);
-            line-height: 1.7;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            line-height: 1.8;
+            margin: 0;
         }
 
         /* الأيقونة الرمادية الجانبية للقصة */
@@ -237,23 +235,53 @@
             fill: #9ea3b2;
         }
 
-        /* زر قراءة التكملة الصادمة */
-        .read-btn {
-            background-color: #eaf3ff;
-            color: var(--primary-color);
-            border: none;
-            padding: 10px 20px;
-            font-size: 13px;
-            font-weight: 700;
-            border-radius: 30px;
-            cursor: pointer;
-            align-self: flex-start;
-            transition: 0.2s;
+        /* صندوق القفل المدمج مباشرة تحت نص القصة داخل نفس الكارد */
+        .locker-inline {
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(243,244,249,0.4) 30%, #f7f9fc 100%);
+            border: 1px solid #edf2f7;
+            border-radius: 16px;
+            padding: 18px 15px;
+            margin-top: 15px;
+            text-align: center;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.01);
         }
 
-        .read-btn:hover {
+        .lock-icon {
+            font-size: 26px;
+            color: #dd6b20;
+            margin-bottom: 8px;
+        }
+
+        .lock-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .lock-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .lock-btn {
             background-color: var(--primary-color);
-            color: #ffffff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 10px rgba(30,144,255,0.2);
+            transition: background 0.2s;
+        }
+
+        .lock-btn:hover {
+            background-color: #187bcd;
         }
 
         /* صفحة مشاركة الأسرار (الاعترافات) */
@@ -390,7 +418,7 @@
                 <span style="cursor:pointer; font-size: 20px;" onclick="toggleSidebar()">✕</span>
             </div>
             <nav class="sidebar-menu">
-                <div class="sidebar-item" onclick="switchTab('tab-archive')">🗂️ رفوف الملفات</div>
+                <div class="sidebar-item" onclick="switchTab('tab-archive')">🗂️ رفوف القصص</div>
                 <div class="sidebar-item" onclick="switchTab('tab-saved')">🌟 الخزانة السرية</div>
                 <div class="sidebar-item" onclick="switchTab('tab-lounge')">💬 ساحة الآراء</div>
                 <div class="sidebar-item" onclick="switchTab('tab-write')">✍️ لوحة الاعتراف</div>
@@ -399,48 +427,66 @@
 
         <!-- [1] تبويب الأرشيف (الرئيسية) -->
         <main class="tab-content active" id="tab-archive">
-            <h2 class="section-title">الملفات الأكثر سخونة 🔥</h2>
+            <h2 class="section-title">القصص الأكثر سخونة 🔥</h2>
 
             <!-- القصة الأولى: العباية الذهبية -->
             <article class="story-card">
                 <div class="story-body">
                     <div class="story-info">
-                        <h3 class="story-title">ملف "العباية الذهبية" (خداع ذكي وصدمة لا تخطر على بال)</h3>
-                        <p class="story-snippet">زوجي العزيز فصل لي عباية مميزة جداً بتطريز ذهبي وحلف علي ما ألبس غيرها لما نطلع، لحد ما طاحت عيني على كيس أسود مخفي تحت المقعد في سيارته وشفت شي جمد الدم بعروقي...</p>
+                        <h3 class="story-title">قصة "العباية الذهبية" (خداع ذكي وصدمة لا تخطر على بال)</h3>
+                        <p class="story-snippet">زوجي العزيز فصل لي عباية مميزة جداً بتطريز ذهبي وحلف علي ما ألبس غيرها لما نطلع، لحد ما طاحت عيني على كيس أسود مخفي تحت المقعد في سيارته وشفت شي جمد الدم بعروقي وشفت نفس عبايتي بالضبط بالداخل واستوعبت اللعبة كلها...</p>
                     </div>
                     <div class="story-icon-wrapper">
                         <svg viewBox="0 0 24 24"><path d="M19 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 18H6V4h12v16z"/></svg>
                     </div>
                 </div>
-                <button class="read-btn" onclick="launchLocker()">كشف بقية السر 🔍</button>
+                <!-- القفل مدمج كجزء متسلسل مباشرة بالداخل -->
+                <div class="locker-inline">
+                    <div class="lock-icon">🔒</div>
+                    <div class="lock-title">نهاية القصة مقفلة</div>
+                    <div class="lock-desc">أكمل أحد التحققات السريعة لتتابع قراءة نهاية اللعبة الخبيثة التي دبرها الزوج.</div>
+                    <button class="lock-btn" onclick="launchLocker()">كشف بقية السر 🔍</button>
+                </div>
             </article>
 
             <!-- القصة الثانية: مجلد التعازي -->
             <article class="story-card">
                 <div class="story-body">
                     <div class="story-info">
-                        <h3 class="story-title">ملف "التعازي المسبقة" (المجلد السري بالكمبيوتر)</h3>
-                        <p class="story-snippet">فتحت كمبيوتر زوجي أدور على ملف ضروري لشغلي، ولقيت مجلد مخفي بشكل نقطة وبداخله نص تعزية بوفاتي مجهز ومجدول للشهر الجاي وتفاصيل العزاء بالكامل وأنا بكامل صحتي وعافيتي...</p>
+                        <h3 class="story-title">قصة "التعازي المسبقة" (المجلد السري بالكمبيوتر)</h3>
+                        <p class="story-snippet">فتحت كمبيوتر زوجي أدور على ملف ضروري لشغلي، ولقيت مجلد مخفي بشكل نقطة وبداخله نص تعزية بوفاتي مجهز ومجدول للشهر الجاي وتفاصيل العزاء بالكامل وأنا بكامل صحتي وعافيتي وسمعت خطواته تقترب...</p>
                     </div>
                     <div class="story-icon-wrapper">
                         <svg viewBox="0 0 24 24"><path d="M19 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 18H6V4h12v16z"/></svg>
                     </div>
                 </div>
-                <button class="read-btn" onclick="launchLocker()">كشف بقية السر 🔍</button>
+                <!-- القفل مدمج كجزء متسلسل مباشرة بالداخل -->
+                <div class="locker-inline">
+                    <div class="lock-icon">🔒</div>
+                    <div class="lock-title">نهاية القصة مقفلة</div>
+                    <div class="lock-desc">يرجى تخطي التحقق بالأسفل لتكتشف كيف تخلصت الزوجة من المخطط وقلبت السحر على الساحر.</div>
+                    <button class="lock-btn" onclick="launchLocker()">كشف بقية السر 🔍</button>
+                </div>
             </article>
 
             <!-- القصة الثالثة: فواحة النوم -->
             <article class="story-card">
                 <div class="story-body">
                     <div class="story-info">
-                        <h3 class="story-title">ملف "فواحة غرفة النوم" (أقوى قصة عن خباثة أخت الزوج)</h3>
-                        <p class="story-snippet">أخت زوجي "حصة" الملاك الحارس أهدتني فواحة ذكية وحلفت علي أحطها بغرفتنا، وفجأة انقلبت حياتنا جحيم وشك وصار زوجي يتهمني بكلام سيء يقول سمعته بأذني لحد ما انكسرت الفواحة وانفجر المستور...</p>
+                        <h3 class="story-title">قصة "فواحة غرفة النوم" (خباثة أخت الزوج)</h3>
+                        <p class="story-snippet">أخت زوجي "حصة" الملاك الحارس أهدتني فواحة وحلفت علي أحطها بغرفتنا، وفجأة انقلبت حياتنا جحيم وشك وصار زوجي يتهمني بكلام يقول سمعته بأذني لحد ما انكسرت الفواحة واكتشفت بداخلها جهاز تصنت بشريحة اتصال...</p>
                     </div>
                     <div class="story-icon-wrapper">
                         <svg viewBox="0 0 24 24"><path d="M19 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 18H6V4h12v16z"/></svg>
                     </div>
                 </div>
-                <button class="read-btn" onclick="launchLocker()">كشف بقية السر 🔍</button>
+                <!-- القفل مدمج كجزء متسلسل مباشرة بالداخل -->
+                <div class="locker-inline">
+                    <div class="lock-icon">🔒</div>
+                    <div class="lock-title">نهاية القصة مقفلة</div>
+                    <div class="lock-desc">تخطى التحقق الأمني لتكتشف الخدعة التكنولوجية وكيف كشفتها الزوجة وعاقبتها بطريقتها.</div>
+                    <button class="lock-btn" onclick="launchLocker()">كشف بقية السر 🔍</button>
+                </div>
             </article>
         </main>
 
@@ -539,7 +585,7 @@
 
         // دالة إرسال السر بشكل وهمي
         function submitSecret() {
-            alert("تم إرسال سرك وتشفيره بالكامل بنجاح مجهول! سنقوم بمراجعته ونشره قريباً في الأرشيف.");
+            alert("تم إرسال قصتك وتشفيرها بالكامل بنجاح مجهول! سنقوم بمراجعتها ونشرها قريباً في الأرشيف.");
             switchTab('tab-archive');
         }
     </script>

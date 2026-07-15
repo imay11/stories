@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maystories - قصص واعترافات</title>
+    <title>imay11 - maystories</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f3f4f9;
+            --bg-color: #f8f9fc;
             --card-bg: #ffffff;
-            --primary-color: #1e90ff;
+            --primary-color: #ff477e; /* لون وردي جذاب يناسب هويتك الجديدة */
             --text-dark: #1a1a2e;
             --text-muted: #7e7e9a;
-            --accent-blue-light: #eaf3ff;
+            --accent-pink-light: #fff0f5;
         }
 
         body {
@@ -29,7 +29,6 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* حاوية التطبيق الرئيسية */
         .app-container {
             width: 100%;
             max-width: 480px;
@@ -43,7 +42,6 @@
             box-sizing: border-box;
         }
 
-        /* الهيدر العلوي */
         .header {
             background-color: var(--card-bg);
             padding: 15px 20px;
@@ -60,7 +58,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--text-dark);
             text-decoration: none;
@@ -155,11 +153,10 @@
         }
 
         .sidebar-item:hover {
-            background-color: #f0f4f8;
+            background-color: var(--accent-pink-light);
             color: var(--primary-color);
         }
 
-        /* المحتوى والتبويبات */
         .tab-content {
             padding: 20px;
             display: none;
@@ -177,7 +174,7 @@
             padding-right: 5px;
         }
 
-        /* بطاقات القصص في الرئيسية (مطابقة للصورة تماماً) */
+        /* كروت القصص الرئيسية */
         .story-card {
             background: var(--card-bg);
             border-radius: 20px;
@@ -218,9 +215,8 @@
             overflow: hidden;
         }
 
-        /* الأيقونة الرمادية الجانبية للقصة كالكتاب */
         .story-icon-wrapper {
-            background-color: #f0f2f6;
+            background-color: var(--accent-pink-light);
             width: 55px;
             height: 55px;
             border-radius: 14px;
@@ -230,15 +226,12 @@
             flex-shrink: 0;
         }
 
-        .story-icon-wrapper svg {
-            width: 26px;
-            height: 26px;
-            fill: #9ea3b2;
+        .story-icon-wrapper span {
+            font-size: 24px;
         }
 
-        /* الزر الأزرق المطابق للصورة تماماً */
         .read-btn {
-            background-color: var(--accent-blue-light);
+            background-color: var(--accent-pink-light);
             color: var(--primary-color);
             border: none;
             padding: 10px 24px;
@@ -252,11 +245,7 @@
             width: fit-content;
         }
 
-        .read-btn:hover {
-            opacity: 0.9;
-        }
-
-        /* صفحة عرض القصة الكاملة المخصصة */
+        /* صفحة القصة الكاملة */
         .story-view-container {
             background-color: var(--card-bg);
             border-radius: 20px;
@@ -280,10 +269,9 @@
             color: #33334b;
             line-height: 1.9;
             margin-bottom: 25px;
-            white-space: pre-line; /* يحافظ على قفزات الأسطر لتسلسل القراءة */
+            white-space: pre-line;
         }
 
-        /* زر الرجوع للأرشيف */
         .back-btn {
             background: none;
             border: none;
@@ -297,10 +285,10 @@
             margin-bottom: 20px;
         }
 
-        /* صندوق القفل داخل القصة */
+        /* القفل بداخل القصة */
         .locker-box {
-            background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, #f7f9fc 100%);
-            border: 1px dashed #cbd5e0;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, #fff5f7 100%);
+            border: 1px dashed var(--primary-color);
             border-radius: 16px;
             padding: 25px 20px;
             text-align: center;
@@ -336,10 +324,10 @@
             border-radius: 12px;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 4px 12px rgba(30,144,255,0.25);
+            box-shadow: 0 4px 12px rgba(255, 71, 126, 0.25);
         }
 
-        /* صفحة مشاركة الأسرار (الاعترافات) */
+        /* صفحة الكتابة */
         .submit-box {
             background: var(--card-bg);
             border-radius: 20px;
@@ -388,10 +376,10 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 4px 15px rgba(30,144,255,0.3);
+            box-shadow: 0 4px 15px rgba(255, 71, 126, 0.3);
         }
 
-        /* شريط التنقل السفلي الفخم */
+        /* شريط التنقل السفلي */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -439,7 +427,6 @@
             fill: var(--primary-color);
         }
 
-        /* رسالة فارغة للتبويبات البديلة */
         .empty-state {
             text-align: center;
             padding: 50px 20px;
@@ -455,9 +442,9 @@
 <body>
 
     <div class="app-container">
-        <!-- الهيدر العلوي -->
+        <!-- الهيدر العلوي بمسمى موقعك وقصصك -->
         <header class="header">
-            <a href="#" class="header-logo" onclick="switchTab('tab-archive')">Maystories <span>☁️</span></a>
+            <a href="#" class="header-logo" onclick="switchTab('tab-archive')">maystories <span>🌸</span></a>
             <button class="menu-btn" onclick="toggleSidebar()">
                 <span></span>
                 <span></span>
@@ -469,108 +456,106 @@
         <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <span style="font-weight: 700; font-size: 18px; color: var(--primary-color);">قائمة الخيارات</span>
+                <span style="font-weight: 700; font-size: 18px; color: var(--primary-color);">imay11</span>
                 <span style="cursor:pointer; font-size: 20px;" onclick="toggleSidebar()">✕</span>
             </div>
             <nav class="sidebar-menu">
-                <div class="sidebar-item" onclick="switchTab('tab-archive')">📖 رفوف القصص</div>
-                <div class="sidebar-item" onclick="switchTab('tab-saved')">🌟 الخزانة السرية</div>
-                <div class="sidebar-item" onclick="switchTab('tab-lounge')">💬 ساحة الآراء</div>
-                <div class="sidebar-item" onclick="switchTab('tab-write')">✍️ لوحة الاعتراف</div>
+                <div class="sidebar-item" onclick="switchTab('tab-archive')">📖 الرئيسية</div>
+                <div class="sidebar-item" onclick="switchTab('tab-saved')">🌟 المفضلة</div>
+                <div class="sidebar-item" onclick="switchTab('tab-lounge')">💬 المجتمع</div>
+                <div class="sidebar-item" onclick="switchTab('tab-write')">✍️ كتابة قصة</div>
             </nav>
         </aside>
 
-        <!-- [1] تبويب الأرشيف (الرئيسية وعرض القصص) -->
+        <!-- التبويب الرئيسي -->
         <main class="tab-content active" id="tab-archive">
             
-            <!-- واجهة قائمة القصص (الرئيسية) -->
+            <!-- قائمة القصص الشائعة -->
             <div id="stories-list-view">
-                <h2 class="section-title">القصص الشائعة الآن 🔥</h2>
+                <h2 class="section-title">القصص الأكثر إثارة الآن 🔥</h2>
 
-                <!-- قصة الدرايف ثرو -->
+                <!-- 1. قصة العبايه -->
                 <article class="story-card">
                     <div class="story-body">
                         <div class="story-info">
-                            <h3 class="story-title">قصة الدرايف ثرو! الساعه 1 منتصف الليل</h3>
-                            <p class="story-snippet">الساعة 1 بالليل أنا وصديقتي راجعين البيت واشتهينا قهوة. دخلنا درايف ثرو حق كافيه معروف. وما كان فيه إلا سيارة وحدة أمامنا هادية وبشكل مريب فجأة فتح السائق الباب وصار شي...</p>
+                            <h3 class="story-title">قصة "العبايه" (السر المدفون بالخيوط السوداء)</h3>
+                            <p class="story-snippet">رجعت من المناسبة وأنا مستعجلة، وبدون ما أركز علّقت العباية في الدولاب. لكن بعد منتصف الليل، سمعت صوت حركة خفيفة داخل الغرفة وصوت سحّاب يُفتح ببطء من اتجاه العباية المجهولة الشبيهة بعبايتي تماماً...</p>
                         </div>
                         <div class="story-icon-wrapper">
-                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            <span>🖤</span>
                         </div>
                     </div>
-                    <button class="read-btn" onclick="openFullStory('driveThru')">قراءة القصة كاملة</button>
+                    <button class="read-btn" onclick="openFullStory('abayaStory')">قراءة القصة كاملة</button>
                 </article>
 
-                <!-- قصة طلعة الكوفي -->
+                <!-- 2. قصة التعازي -->
                 <article class="story-card">
                     <div class="story-body">
                         <div class="story-info">
-                            <h3 class="story-title">قصة "طلعة الكوفي" (رعب خيانة الثقة)</h3>
-                            <p class="story-snippet">أبوي إنسان جداً صارم، وممنوع أطلع لأماكن معينة. صاحبتي أقنعتني نطلع بدون علمه لكوفي مشهور وبعيد في زاوية مظلمة، وأنا هناك لمحت شخص لابس نفس شماغ أبوي وبنفس مشيته يتجه لطاولتنا فجأة وعيونه مليانة غضب...</p>
+                            <h3 class="story-title">قصة "التعازي" (صدمة خلف جدران الحزن)</h3>
+                            <p class="story-snippet">كنا واقفين بصف العزاء والمكان غارق بالبكاء والصمت المهيب. فجأة دخلت امرأة مجهولة تماماً، لا أحد من العائلة يعرفها، وتقدمت بخطوات هادئة حتى وقفت أمامي وهمست في أذني بسر غيّر مجرى حياتنا للأبد...</p>
                         </div>
                         <div class="story-icon-wrapper">
-                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            <span>🕯️</span>
                         </div>
                     </div>
-                    <button class="read-btn" onclick="openFullStory('coffeeStory')">قراءة القصة كاملة</button>
+                    <button class="read-btn" onclick="openFullStory('condolencesStory')">قراءة القصة كاملة</button>
                 </article>
 
-                <!-- قصة الحبيب الوهمي -->
+                <!-- 3. قصة فواحة غرفة النوم -->
                 <article class="story-card">
                     <div class="story-body">
                         <div class="story-info">
-                            <h3 class="story-title">قصة "الحبيب الوهمي" (استغلال عاطفي وتلاعب نفسي مرعب)</h3>
-                            <p class="story-snippet">صديقة عمري هي الوحيدة اللي تعرف إني أكلم شخص بـ "سناب شات" من سنتين ووعدني بالزواج أول ما يرجع من بعثته. اليوم صديقتي نسيت جوالها مفتوح على طاولة الطعام وجتني رسالة منه على جوالي، وبنفس الثانية اهتز جوالها ونورت الشاشة...</p>
+                            <h3 class="story-title">قصة "فواحة غرفة النوم" (رائحة الشك والخيانة)</h3>
+                            <p class="story-snippet">دخلت غرفتي بعد غياب يومين، ولفتت انتباهي رائحة عطر فواحة جديدة كلياً لم أشترِها أبداً! الفواحة كانت موضوعة في زاوية مخفية وتعمل بانتظام، وحين اقتربت لأتفحصها اكتشفت كارثة مخبأة بداخلها لم أتوقعها...</p>
                         </div>
                         <div class="story-icon-wrapper">
-                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            <span>💨</span>
                         </div>
                     </div>
-                    <button class="read-btn" onclick="openFullStory('fakeLover')">قراءة القصة كاملة</button>
+                    <button class="read-btn" onclick="openFullStory('diffuserStory')">قراءة القصة كاملة</button>
                 </article>
             </div>
 
-            <!-- صفحة عرض تفاصيل القصة الفردية (مخفية وتظهر عند النقر) -->
+            <!-- صفحة عرض تفاصيل القصة المحددة -->
             <div id="story-detail-view" style="display: none;">
-                <button class="back-btn" onclick="showStoriesList()">◀ العودة للقصص</button>
+                <button class="back-btn" onclick="showStoriesList()">◀ العودة للرئيسية</button>
                 <div class="story-view-container">
                     <h3 class="story-view-title" id="detail-title">عنوان القصة</h3>
                     <div class="story-view-content" id="detail-text">
-                        محتوى القصة المسترسل يظهر هنا بالكامل...
+                        محتوى القصة يظهر هنا بالكامل...
                     </div>
-                    <!-- قفل المحتوى المدمج في النهاية -->
+                    <!-- القفل المدمج بداخل نهاية كل قصة -->
                     <div class="locker-box">
                         <div class="lock-icon">🔒</div>
-                        <div class="lock-title">متبقي جزء بسيط لمعرفة الصدمة النهائية!</div>
-                        <div class="lock-desc">لإكمال قراءة الجزء الأخير المثير من القصة، يرجى إثبات أنك لست برنامج روبوت عبر إكمال أحد العروض السريعة بالأسفل.</div>
-                        <button class="lock-action-btn" onclick="launchLocker()">فتح بقية القصة الصادمة 🔓</button>
+                        <div class="lock-title">متبقي خطوة أخيرة لكشف بقية الصدمة!</div>
+                        <div class="lock-desc">لمتابعة قراءة نهاية القصة المثيرة ومعرفة السر الصادم، يرجى إثبات أنك لست برنامج روبوت عبر إكمال أحد المهام السريعة بالأسفل.</div>
+                        <button class="lock-action-btn" onclick="launchLocker()">كشف النهاية الصادمة الآن 🔓</button>
                     </div>
                 </div>
             </div>
 
         </main>
 
-        <!-- [2] تبويب محفوظاتي (المفضلة) -->
+        <!-- التبويبات الأخرى -->
         <div class="tab-content" id="tab-saved">
             <div class="empty-state">
                 <div class="empty-state-icon">🌟</div>
-                <h3>خزانتك السرية فارغة</h3>
+                <h3>المفضلة فارغة</h3>
                 <p>القصص التي تحفظها ستظهر لك هنا لتصل إليها لاحقاً بسهولة.</p>
             </div>
         </div>
 
-        <!-- [3] تبويب ديوانية Maystories (المجتمع) -->
         <div class="tab-content" id="tab-lounge">
             <div class="empty-state">
                 <div class="empty-state-icon">💬</div>
-                <h3>الديوانية مغلقة مؤقتاً</h3>
-                <p>النقاشات وتبادل الآراء حول القصص المٹيرة ستتوفر في التحديث القادم.</p>
+                <h3>المجتمع مغلق مؤقتاً</h3>
+                <p>النقاشات وتبادل الآراء حول قصص maystories ستتوفر في التحديث القادم.</p>
             </div>
         </div>
 
-        <!-- [4] تبويب اعترافك (كتابة قصة) -->
         <div class="tab-content" id="tab-write">
-            <h2 class="section-title">انشر قصتك الغامضة 🤫</h2>
+            <h2 class="section-title">شاركنا قصتك على imay11 🤫</h2>
             <div class="submit-box">
                 <div class="input-group">
                     <input type="text" class="input-field" placeholder="عنوان قصتك هنا...">
@@ -579,12 +564,12 @@
                     <textarea class="input-field textarea-field" placeholder="اكتب تفاصيل قصتك بكل حرية وبشكل مجهول وسري بالكامل..."></textarea>
                 </div>
                 <button class="submit-btn" onclick="submitSecret()">
-                    <span>إرسال بشكل مجهول 🚀</span>
+                    <span>إرسال القصة 🚀</span>
                 </button>
             </div>
         </div>
 
-        <!-- شريط التنقل السفلي الفخم -->
+        <!-- شريط التنقل السفلي الفخم والمطابق تماماً -->
         <nav class="bottom-nav">
             <button class="nav-item active" onclick="switchTab('tab-archive')" id="nav-archive">
                 <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
@@ -606,70 +591,57 @@
     </div>
 
     <script type="text/javascript">
-        // قاعدة بيانات نصوص القصص الكاملة التي تظهر داخل الصفحة الفرعية
+        // قاعدة نصوص قصصك الثلاث الأساسية
         const database = {
-            driveThru: {
-                title: 'قصة الدرايف ثرو! الساعه 1 منتصف الليل',
-                text: `الساعة 1 بالليل أنا وصديقتي راجعين البيت بعد يوم طويل ومرهق، واشتهينا قهوة تعدل المزاج قبل النوم. قررنا نمر على درايف ثرو لكافيه معروف على أطراف الحي. 
+            abayaStory: {
+                title: 'قصة "العبايه" (السر المدفون بالخيوط السوداء)',
+                text: `رجعت من المناسبة الكبيرة وأنا مرهقة وتعبة جداً، علّقت عبايتي بالدولاب فوراً وارتميت على السرير لأغط في نوم عميق.
 
-الشارع كان شبة خالي تماماً والهدوء يلف المكان، وما كان فيه بالطابور غير سيارة سوداء وحدة مغلّفة بالكامل بالكامل واقفه قدامنا عند شباك الطلب.
+الساعة 3 الفجر، استيقظت على صوت حركة خفيفة غريبة داخل الغرفة... وكأن هناك شخصاً يسحب شيئاً من على المشجب ببطء شديد. التفتّ بصعوبة، وكان النور خافتاً جداً، ورأيت خيالاً يقف أمام عبايتي المفتوحة ويمسك أطرافها.
 
-الغريب إنها كانت واقفة بدون حركة لدقائق طويلة، وما استلموا أي طلب ولا تحركوا شبر واحد. وبدأنا نشعر بالتوتر والملل وصرت أطالع في صديقتي بتردد. 
-
-وفجأة وبدون أي مقدمات، انفتح باب السائق بقوة ونزل منها شخص ضخم يرتدي معطفاً أسوداً طويلاً، ولم يلتفت جهة الكافيه إطلاقاً بل استدار بجسده كاملاً ومشى بخطوات سريعة ومرعبة باتجاه سيارتنا مباشرة وهو يخرج شيئاً معدنياً لامعاً من جيبه الخلفي...`
+كتمت أنفاسي من شدة الرعب، وحين ركّزت نظري، اكتشفت أن هذه العباية ليست عبايتي أبداً! رغم أنها تشبهها بنسبة 99%، إلا أن هذه العباية كانت تحمل نقشة غامضة على الأكمام من الداخل ومكتوب عليها رسالة مرعبة بخط يد صغير جداً، وحين قرأت الرسالة شعرت بأن هناك من يراقبني في هذه اللحظة...`
             },
-            coffeeStory: {
-                title: 'قصة "طلعة الكوفي" (رعب خيانة الثقة)',
-                text: `أبوي إنسان محافظ وجداً صارم في قراراته، وكان دائماً يمنعني من الذهاب للمقاهي المزدحمة أو الخروج ليلاً بدون محرم أو إذن مسبق. 
+            condolencesStory: {
+                title: 'قصة "التعازي" (صدمة خلف جدران الحزن)',
+                text: `كنا نقف في طابور المعزّين، الحزن يكسو وجوه الجميع، وصوت البكاء الهادئ يملأ أرجاء المكان. فجأة، فُتح الباب الخارجي ودخلت امرأة بنقاب أسود داكن، لم يسبق لأحد من أفراد عائلتنا رؤيتها أو معرفتها من قبل.
 
-في أحد الأيام اتصلت بي صديقة مقربة جداً وأقنعتني بأسلوبها الساحر إننا نطلع "سهرة كوفي" سريعة في مكان هادئ وبعيد بالكامل عن الأنظار عشان ما أحد يشوفنا، وحلفت علي ألا أخبر أحداً وأن أخرج خلسة.
+تجاوزت جميع الحاضرين بخطوات واثقة وهادئة للغاية، ولم تتوقف حتى وقفت أمامي مباشرة. رفعت نقابها قليلاً لتكشف عن عينيها المليئتين بالدموع الصامتة، ثم اقتربت ووضعت يدها الباردة على كتفي وهمست في أذني بجملة واحدة تسببت في توقف النبض في عروقي كلياً.
 
-استسلمت لإلحاحها الشديد وخرجت معها، وذهبنا إلى كوفي يقع في زاوية معتمة وشبه معزولة من المدينة. كنا نتحدث ونضحك حتى لمحت فجأة من خلف الزجاج الخارجي شخصاً يترجل من سيارته ويرتدي نفس شماغ أبوي تماماً وبنفس تفاصيل مشيته وثقته المهيبة.
-
-بدأ يتجه نحو الطاولة التي نجلس عليها مباشرة، وكان رأسه منخفضاً ويقترب بخطوات واثقة وسريعة، وعقلي تشتت بالكامل وضربات قلبي تسارعت كأنها ستنفجر، وعندما وقف على رأس الطاولة ورفع رأسه حدثت الصدمة المرعبة...`
+تلك الجملة لم تكن مواساة، بل كانت سراً غامضاً يخص المتوفي، كشف لي بأن حياتنا الهادئة طوال السنوات الماضية لم تكن سوى كذبة كبيرة ومدروسة بعناية...`
             },
-            fakeLover: {
-                title: 'قصة "الحبيب الوهمي" (استغلال عاطفي وتلاعب نفسي مرعب)',
-                text: `صديقة عمري التي تشاركني تفاصيل غرفتي ويومي هي الوحيدة في هذا العالم التي تعرف إني على علاقة عاطفية بشخص تعرفت عليه في تطبيق "سناب شات" منذ سنتين.
+            diffuserStory: {
+                title: 'قصة "فواحة غرفة النوم" (رائحة الشك والخيانة)',
+                text: `سافرت لمدة يومين فقط في عمل طارئ، وعندما عدت وفتحت باب غرفتي، فاجأتني رائحة عطرية زكية وجديدة كلياً تملأ المكان. لم تكن هذه الرائحة من عطوري المعتادة إطلاقاً.
 
-كان يغدقني بالاهتمام والوعود، ووعدني بالتقدم لخطبتي رسمياً فور انتهاء بعثته الدراسية في الخارج وعودته للبلاد، وكنت أعيش على هذا الأمل وأحكي لصديقتي كل كلمة وتفصيل يقولها لي.
+تتبعت الرائحة بفضول ممزوج ببعض القلق والغرابة، حتى وجدت فواحة أنيقة وصغيرة موضوعة خلف الستارة بجانب السرير وتعمل بانتظام وهدوء. اتصلت بزوجي لأسأله إن كان هو من اشتراها، لكنه نفى تماماً علمه بوجود أي فواحة جديدة في المنزل!
 
-في أحد الأيام كنا نجلس سوياً في منزلي، وذهبت صديقتي للمطبخ لإحضار بعض المشروبات وتركت هاتفها مفتوحاً دون قصد على طاولة الطعام بجانبي. 
-
-في نفس اللحظة أرسلت لحبيبي رسالة عتاب بسيطة على جوالي، وفجأة وبذات الثانية تماماً اهتز هاتف صديقتي المفتوح بجانبي ونورت شاشته لتعرض إشعاراً مرعباً جداً كشف لي حقيقة السنتين الماضيتين بالكامل...`
+هنا بدأ قلبي ينبض بقوة وشعرت بالخوف، اقتربت من الفواحة وحملتها بيدي لأتفحصها بعناية، وعندما قلبتها، وجدت ثقباً صغيراً جداً ومظلماً يبرق بوميض أحمر خافت للغاية... وحينها أدركت الصدمة الحقيقية التي كانت تسجل كل تفاصيل حياتي خلف هذه الفواحة...`
             }
         };
 
-        // دالة لفتح صفحة القصة الكاملة
         function openFullStory(storyId) {
             const storyData = database[storyId];
             if (storyData) {
-                // تعبئة البيانات في الصفحة الفرعية
                 document.getElementById('detail-title').innerText = storyData.title;
                 document.getElementById('detail-text').innerText = storyData.text;
 
-                // إخفاء القائمة الرئيسية وإظهار واجهة تفاصيل القصة
                 document.getElementById('stories-list-view').style.display = 'none';
                 document.getElementById('story-detail-view').style.display = 'block';
 
-                // الصعود لأعلى الصفحة بسلاسة ليقرأ العميل من البداية
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
-        // دالة العودة لقائمة القصص بالرئيسية
         function showStoriesList() {
             document.getElementById('story-detail-view').style.display = 'none';
             document.getElementById('stories-list-view').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // تحويل العميل لعروض الـ CPA (رابط القفل الخاص بك)
         function launchLocker() {
             window.location.href = "https://quartzfiles.com/1904575";
         }
 
-        // دالة التبديل بين التبويبات السفلية بشكل ناعم
         function switchTab(tabId) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
@@ -682,7 +654,6 @@
             const btnId = tabId.replace('tab-', 'nav-');
             document.getElementById(btnId).classList.add('active');
 
-            // عند العودة لتبويب الرئيسية، نضمن عرض القائمة وإخفاء تفاصيل القصص المفتوحة سابقاً
             if (tabId === 'tab-archive') {
                 showStoriesList();
             }
@@ -693,7 +664,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // التحكم بالقائمة الجانبية
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
@@ -701,9 +671,8 @@
             overlay.classList.toggle('active');
         }
 
-        // إرسال قصة وهمي
         function submitSecret() {
-            alert("تم إرسال قصتك بنجاح مجهول! سنقوم بمراجعتها ونشرها قريباً في الأرشيف.");
+            alert("تم إرسال قصتك بنجاح! سنقوم بمراجعتها ونشرها قريباً.");
             switchTab('tab-archive');
         }
     </script>
